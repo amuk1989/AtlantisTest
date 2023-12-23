@@ -28,12 +28,10 @@ namespace WebRequest.Services
 
                 try
                 {
-                    request = UnityWebRequestTexture.GetTexture(url);
-
-                    var downloadHandler = request.downloadHandler;
+                    await UniTask.SwitchToMainThread(cancellationToken: token);
                     
-                    await UniTask
-                        .SwitchToMainThread(cancellationToken: token);
+                    request = UnityWebRequestTexture.GetTexture(url);
+                    var downloadHandler = request.downloadHandler;
 
                     UpdateProgressFlow(request);
                     

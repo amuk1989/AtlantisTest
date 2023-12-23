@@ -1,4 +1,5 @@
 ﻿using Image.Interfaces;
+using Image.Services;
 using Zenject;
 
 namespace Image.Bootstrap
@@ -8,7 +9,7 @@ namespace Image.Bootstrap
         public override void InstallBindings()
         {
             Container
-                .BindInterfacesTo<IImageProvider>()
+                .BindInterfacesTo<ImageProvider>()
                 .AsSingle()
                 .NonLazy();
         }

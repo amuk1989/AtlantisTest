@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d65cc26ae344a60a4f7540387d1842e, type: 3}
   m_Name: ImageConfigs
   m_EditorClassIdentifier: 
+  _data:
+    _url: https://user74522.clients-cdnnow.ru/static/uploads/mrk6440mark.png
