@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 743652ddfbd949c797332a2cec7070df, type: 3}
+  m_Name: ConfigRegistry
+  m_EditorClassIdentifier: 
+  _gameStageConfig: {fileID: 11400000, guid: 035ede2c15c48044c898279e5a68adb8, type: 2}
+  _inputConfig: {fileID: 11400000, guid: 09c0b15ea68c69146a9e98105397e1e7, type: 2}
