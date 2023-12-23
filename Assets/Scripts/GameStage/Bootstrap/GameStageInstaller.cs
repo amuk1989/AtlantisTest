@@ -25,6 +25,12 @@ namespace GameStage.Bootstrap
                 .AsSingle();
             
             Container
+                .Bind<IGameStage>()
+                .WithId(GameStageId.ResourcesDownload)
+                .To<DownloadResourcesStage>()
+                .AsSingle();
+            
+            Container
                 .BindInterfacesTo<GameStageController>()
                 .AsSingle()
                 .NonLazy();

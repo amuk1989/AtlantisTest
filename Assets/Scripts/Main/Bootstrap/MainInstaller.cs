@@ -1,6 +1,9 @@
 ﻿using AR.Bootstrap;
 using GameStage.Bootstrap;
+using Image.Bootstrap;
 using Input.Bootstrap;
+using WebRequest.Bootstrap;
+using WebRequest.Services;
 using Zenject;
 
 namespace Main.Bootstrap
@@ -12,6 +15,8 @@ namespace Main.Bootstrap
             Container.Install<GameStageInstaller>();
             Container.Install<InputInstaller>();
             Container.Install<ARInstaller>();
+            Container.Install<ImageInstaller>();
+            Container.Install<WebRequestInstaller>();
         }
     }
 }
