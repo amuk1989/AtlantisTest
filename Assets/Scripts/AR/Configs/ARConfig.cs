@@ -1,4 +1,5 @@
-﻿using AR.Views;
+﻿using System;
+using AR.Views;
 using Base.Data;
 using Base.Interfaces;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace AR.Configs
         
     }
     
+    [Serializable]
     public struct ARConfigData: IConfigData
     {
         [SerializeField] private ARComponents _prefab;

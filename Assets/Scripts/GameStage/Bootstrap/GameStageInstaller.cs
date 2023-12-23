@@ -2,6 +2,8 @@
 using GameStage.Data;
 using GameStage.Factories;
 using GameStage.Interfaces;
+using GameStage.Stages;
+using UnityEngine.XR.ARFoundation;
 using Zenject;
 
 namespace GameStage.Bootstrap
@@ -10,11 +12,17 @@ namespace GameStage.Bootstrap
     {
         public override void InstallBindings()
         {
-            // Container
-            //     .Bind<IGameStage>()
-            //     .WithId(GameStageId.Game)
-            //     .To<Stages.GameStage>()
-            //     .AsSingle();
+            Container
+                .Bind<IGameStage>()
+                .WithId(GameStageId.ARSession)
+                .To<ARSessionStage>()
+                .AsSingle();
+            
+            Container
+                .Bind<IGameStage>()
+                .WithId(GameStageId.StartMenu)
+                .To<MainMenuStage>()
+                .AsSingle();
             
             Container
                 .BindInterfacesTo<GameStageController>()

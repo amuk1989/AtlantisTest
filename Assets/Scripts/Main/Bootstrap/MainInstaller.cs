@@ -1,4 +1,5 @@
-﻿using GameStage.Bootstrap;
+﻿using AR.Bootstrap;
+using GameStage.Bootstrap;
 using Input.Bootstrap;
 using Zenject;
 
@@ -10,6 +11,7 @@ namespace Main.Bootstrap
         {
             Container.Install<GameStageInstaller>();
             Container.Install<InputInstaller>();
+            Container.Install<ARInstaller>();
         }
     }
 }
