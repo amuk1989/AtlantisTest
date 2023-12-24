@@ -1,4 +1,6 @@
-﻿using WebRequest.Services;
+﻿using System.Net;
+using WebRequest.Data;
+using WebRequest.Services;
 using Zenject;
 
 namespace WebRequest.Bootstrap
@@ -11,6 +13,9 @@ namespace WebRequest.Bootstrap
                 .BindInterfacesTo<WebRequestService>()
                 .AsSingle()
                 .NonLazy();
+
+            Container
+                .DeclareSignal<WebRequestSignals.ConnectionError>();
         }
     }
 }

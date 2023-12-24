@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using GLTFast;
 using Model.Configs;
+using Model.Data;
 using Model.Interfaces;
 using Model.Views;
 using UnityEngine;
@@ -36,9 +37,9 @@ namespace Model.Services
         public async void Enable()
         {
             _modelView ??= _factory.Create();
-            _modelView.SetActive(false);
+            HideModel();
             await GetModelFromUrl(_modelConfigData.Url, _modelView.GetTransform());
-            _modelView.SetScale(Vector3.one*0.05f);
+            _modelView.SetScale(0.05f);
         }
 
         public void Disable()
@@ -55,7 +56,17 @@ namespace Model.Services
         {
             _modelView.SetPositionAndRotation(position, rotation);
         }
-        
+
+        public void SetScale(float scale)
+        {
+            _modelView.SetScale(scale);
+        }
+
+        public void SetRotationIncrement(Quaternion increment)
+        {
+            _modelView.SetRotationIncrement(increment);
+        }
+
         private void Cancel()
         {
             if (_token == null) return;

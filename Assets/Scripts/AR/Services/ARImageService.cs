@@ -65,19 +65,16 @@ namespace AR.Services
         {
             foreach (var newImage in eventArgs.added)
             {
-                Debug.Log($"[ARImageService] Image Added");
                 _onImageUpdated.Execute((newImage.transform.position, newImage.transform.rotation));
             }
 
             foreach (var updatedImage in eventArgs.updated)
             {
-                Debug.Log($"[ARImageService] Image updated");
                 _onImageUpdated.Execute((updatedImage.transform.position, updatedImage.transform.rotation));
             }
 
             foreach (var removedImage in eventArgs.removed)
             {
-                Debug.Log($"[ARImageService] Image removed");
                 _onImageRemoved.Execute();
             }
         }

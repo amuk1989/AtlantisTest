@@ -4,17 +4,26 @@ using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Networking;
+using WebRequest.Data;
 using WebRequest.Interfaces;
+using Zenject;
 
 namespace WebRequest.Services
 {
     public class WebRequestService: IWebRequestService
     {
+        private readonly SignalBus _signalBus;
+        
         private readonly ReactiveProperty<float> _progress = new(0);
         private readonly ReactiveCommand _onCompleted = new();
 
         private IDisposable _progressFlow;
-        
+
+        public WebRequestService(SignalBus signalBus)
+        {
+            _signalBus = signalBus;
+        }
+
         public IObservable<float> RequestProgressAsObservable()
         {
             return _progress.AsObservable();
@@ -54,6 +63,7 @@ namespace WebRequest.Services
                 catch (UnityWebRequestException exception)
                 {
                     Debug.Log(exception.Message);
+                    _signalBus.Fire(new WebRequestSignals.ConnectionError(exception.Message));
                 }
                 finally
                 {
@@ -94,6 +104,7 @@ namespace WebRequest.Services
                 catch (UnityWebRequestException exception)
                 {
                     Debug.Log(exception.Message);
+                    _signalBus.Fire(new WebRequestSignals.ConnectionError(exception.Message));
                 }
                 finally
                 {

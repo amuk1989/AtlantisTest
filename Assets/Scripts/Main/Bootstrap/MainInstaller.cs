@@ -23,6 +23,8 @@ namespace Main.Bootstrap
             Container.Install<ModelInstaller>();
             Container.Install<WebRequestInstaller>();
             Container.Install<UIBootstrap>();
+            
+            SignalBusInstaller.Install(Container);
         }
     }
 }
