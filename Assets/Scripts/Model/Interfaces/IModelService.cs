@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Model.Views;
+using UnityEngine;
 
 namespace Model.Interfaces
 {
@@ -8,6 +9,6 @@ namespace Model.Interfaces
         public void Disable();
         public void ShowModel();
         public void HideModel();
-        public GameObject GetModel();
+        public ModelView GetModel();
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4990590032610537203}
   - component: {fileID: 143378343555993855}
+  - component: {fileID: 492895456015216556}
   m_Layer: 0
   m_Name: ModelView
   m_TagString: Untagged
@@ -44,3 +45,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb8abc59e614734bc0c6c9de85baaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &492895456015216556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542722601680745162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b781fe673a5534e91b1e802df4b9362e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  importSettings:
+    nodeNameMethod: 0
+    animationMethod: 1
+    generateMipMaps: 0
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  url: 
+  loadOnStartup: 0
+  sceneId: -1
+  playAutomatically: 1
+  streamingAsset: 0
+  instantiationSettings:
+    mask: -1
+    layer: 0
+    skinUpdateWhenOffscreen: 1
+    lightIntensityFactor: 1
+    sceneObjectCreation: 2

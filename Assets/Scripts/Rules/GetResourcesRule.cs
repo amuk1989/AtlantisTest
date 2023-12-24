@@ -37,9 +37,6 @@ namespace Rules
             Debug.Log($"[ImageRule] image==nul : {image==null}, format: {image.graphicsFormat}");
             
             if (image == null || model == null) return;
-            
-            _arService.SetTrackImage(image);
-            _arService.SetArObject(model);
         }
     }
 }

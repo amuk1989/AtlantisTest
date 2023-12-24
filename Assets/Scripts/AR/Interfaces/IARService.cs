@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using AR.Views;
+using UnityEngine;
 
 namespace AR.Interfaces
 {
@@ -6,7 +8,5 @@ namespace AR.Interfaces
     {
         public void AREnable();
         public void ARDisable();
-        public void SetTrackImage(Texture2D imageToAdd);
-        public void SetArObject(GameObject gameObject);
     }
 }

@@ -38,6 +38,7 @@ namespace Model.Services
             _modelView ??= _factory.Create();
             _modelView.SetActive(false);
             await GetModelFromUrl(_modelConfigData.Url, _modelView.GetTransform());
+            _modelView.SetScale(Vector3.one*0.05f);
         }
 
         public void Disable()
@@ -57,9 +58,9 @@ namespace Model.Services
             _modelView.SetActive(false);
         }
 
-        public GameObject GetModel()
+        public ModelView GetModel()
         {
-            return _modelView.gameObject;
+            return _modelView;
         }
 
         private void Cancel()
@@ -76,7 +77,7 @@ namespace Model.Services
         {
             _token = new CancellationTokenSource();
             var data =  await _webRequestService.GetDataFromUrl(url, _token.Token);
-
+            
             if (data == null) return;
             
             var gltf = new GltfImport();
@@ -84,7 +85,9 @@ namespace Model.Services
             try
             {
                 bool success = await gltf.LoadGltfBinary(data);
-
+                
+                Debug.Log($"[ModelService] ModelView success: {success}");
+                
                 if (!success) return;
                 
                 await gltf.InstantiateMainSceneAsync(parentTransform);

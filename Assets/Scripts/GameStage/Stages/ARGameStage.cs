@@ -13,12 +13,17 @@ namespace GameStage.Stages
         private readonly IImageProvider _imageProvider;
         private readonly IModelService _modelService;
         private readonly IARService _arService;
+        private readonly IARImageProvider _arImage;
 
-        public ARGameStage(IImageProvider imageProvider, IModelService modelService, IARService arService)
+        private CompositeDisposable _compositeDisposable;
+
+        public ARGameStage(IImageProvider imageProvider, IModelService modelService, IARService arService, 
+            IARImageProvider arImage)
         {
             _imageProvider = imageProvider;
             _modelService = modelService;
             _arService = arService;
+            _arImage = arImage;
         }
 
         public void Execute()
@@ -31,13 +36,28 @@ namespace GameStage.Stages
             
             if (image == null || model == null) return;
             
-            _arService.SetTrackImage(image);
-            _arService.SetArObject(model);
+            _arImage.SetTrackImage(image);
+
+            _compositeDisposable = new CompositeDisposable();
+
+            _arImage
+                .TrackImageRemovedAsObservable()
+                .Subscribe(_ => model.SetActive(false))
+                .AddTo(_compositeDisposable);
+
+            _arImage
+                .TrackImageUpdateAsObservable()
+                .Subscribe(value =>
+                {
+                    model.SetActive(true);
+                    model.SetPositionAndRotation(value.Item1, value.Item2);
+                })
+                .AddTo(_compositeDisposable);
         }
 
         public void Complete()
         {
-            
+            _compositeDisposable?.Dispose();
         }
 
         public IObservable<Unit> StageCompletedAsRx()

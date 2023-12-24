@@ -109,11 +109,7 @@ namespace WebRequest.Services
         {
             _progressFlow = Observable
                 .EveryUpdate()
-                .Subscribe(_ =>
-                {
-                    _progress.Value = webRequest.downloadProgress;
-                    Debug.Log($"[WebRequestService] progress {_progress.Value}");
-                });
+                .Subscribe(_ => _progress.Value = webRequest.downloadProgress);
         }
 
         private async void StopProgressFlow()
