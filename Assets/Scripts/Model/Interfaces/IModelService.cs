@@ -11,7 +11,6 @@ namespace Model.Interfaces
         public void ShowModel();
         public void HideModel();
         public void SetPositionAndRotation(Vector3 position, Quaternion rotation);
-        // public void UpdateTransformData(TransformData data);
         public void SetScale(float scale);
         public void SetRotationIncrement(Quaternion increment);
     }

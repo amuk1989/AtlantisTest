@@ -16,8 +16,8 @@ namespace Model.Configs
     public struct ModelConfigData: IConfigData
     {
         [SerializeField] private string _url;
-        [SerializeField] private ModelView _prefab;
+        [SerializeField] private ModelViewHandler _prefab;
         public string Url => _url;
-        public ModelView Prefab => _prefab;
+        public ModelViewHandler Prefab => _prefab;
     }
 }

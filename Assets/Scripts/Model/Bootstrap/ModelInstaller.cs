@@ -17,7 +17,7 @@ namespace Model.Bootstrap
                 .NonLazy();
 
             Container
-                .BindFactory<ModelView, ModelView.Factory>()
+                .BindFactory<ModelViewHandler, ModelViewHandler.Factory>()
                 .FromComponentInNewPrefab(_configData.Prefab);
         }
     }

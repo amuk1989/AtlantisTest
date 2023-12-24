@@ -16,13 +16,13 @@ namespace Model.Services
     {
         private readonly IWebRequestService _webRequestService;
         private readonly ModelConfigData _modelConfigData;
-        private readonly ModelView.Factory _factory;
+        private readonly ModelViewHandler.Factory _factory;
 
-        private ModelView _modelView = null;
+        private ModelViewHandler _modelViewHandler = null;
         
         private CancellationTokenSource _token;
 
-        public ModelViewService(IWebRequestService webRequestService, ModelConfigData modelConfigData, ModelView.Factory factory)
+        public ModelViewService(IWebRequestService webRequestService, ModelConfigData modelConfigData, ModelViewHandler.Factory factory)
         {
             _webRequestService = webRequestService;
             _modelConfigData = modelConfigData;
@@ -36,35 +36,35 @@ namespace Model.Services
 
         public async void Enable()
         {
-            _modelView ??= _factory.Create();
+            _modelViewHandler ??= _factory.Create();
             HideModel();
-            await GetModelFromUrl(_modelConfigData.Url, _modelView.GetTransform());
-            _modelView.SetScale(0.05f);
+            await GetModelFromUrl(_modelConfigData.Url, _modelViewHandler.GetTransform());
+            _modelViewHandler.SetScale(0.05f);
         }
 
         public void Disable()
         {
             Cancel();
-            if (_modelView == null) _modelView.Dispose();
-            _modelView = null;
+            if (_modelViewHandler == null) _modelViewHandler.Dispose();
+            _modelViewHandler = null;
         }
 
-        public void ShowModel() => _modelView.SetActive(true);
-        public void HideModel() => _modelView.SetActive(false);
+        public void ShowModel() => _modelViewHandler.SetActive(true);
+        public void HideModel() => _modelViewHandler.SetActive(false);
 
         public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
         {
-            _modelView.SetPositionAndRotation(position, rotation);
+            _modelViewHandler.SetPositionAndRotation(position, rotation);
         }
 
         public void SetScale(float scale)
         {
-            _modelView.SetScale(scale);
+            _modelViewHandler.SetScale(scale);
         }
 
         public void SetRotationIncrement(Quaternion increment)
         {
-            _modelView.SetRotationIncrement(increment);
+            _modelViewHandler.SetRotationIncrement(increment);
         }
 
         private void Cancel()
