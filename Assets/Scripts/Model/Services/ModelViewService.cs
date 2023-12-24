@@ -11,7 +11,7 @@ using Zenject;
 
 namespace Model.Services
 {
-    public class ModelService: IModelService, IDisposable
+    public class ModelViewService: IModelService, IDisposable
     {
         private readonly IWebRequestService _webRequestService;
         private readonly ModelConfigData _modelConfigData;
@@ -21,7 +21,7 @@ namespace Model.Services
         
         private CancellationTokenSource _token;
 
-        public ModelService(IWebRequestService webRequestService, ModelConfigData modelConfigData, ModelView.Factory factory)
+        public ModelViewService(IWebRequestService webRequestService, ModelConfigData modelConfigData, ModelView.Factory factory)
         {
             _webRequestService = webRequestService;
             _modelConfigData = modelConfigData;
@@ -48,21 +48,14 @@ namespace Model.Services
             _modelView = null;
         }
 
-        public void ShowModel()
-        {
-            _modelView.SetActive(true);
-        }
+        public void ShowModel() => _modelView.SetActive(true);
+        public void HideModel() => _modelView.SetActive(false);
 
-        public void HideModel()
+        public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
         {
-            _modelView.SetActive(false);
+            _modelView.SetPositionAndRotation(position, rotation);
         }
-
-        public ModelView GetModel()
-        {
-            return _modelView;
-        }
-
+        
         private void Cancel()
         {
             if (_token == null) return;

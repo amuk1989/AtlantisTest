@@ -9,6 +9,6 @@ namespace Model.Interfaces
         public void Disable();
         public void ShowModel();
         public void HideModel();
-        public ModelView GetModel();
+        public void SetPositionAndRotation(Vector3 position, Quaternion rotation);
     }
 }

@@ -29,12 +29,10 @@ namespace GameStage.Stages
         public void Execute()
         {
             var image = _imageProvider.GetImage();
-            var model = _modelService.GetModel();
             
             Debug.Log($"[ARGameStage] image==nul : {image==null}, format: {image.graphicsFormat}");
-            Debug.Log($"[ARGameStage] model==nul : {model==null}");
             
-            if (image == null || model == null) return;
+            if (image == null) return;
             
             _arImage.SetTrackImage(image);
 
@@ -42,15 +40,15 @@ namespace GameStage.Stages
 
             _arImage
                 .TrackImageRemovedAsObservable()
-                .Subscribe(_ => model.SetActive(false))
+                .Subscribe(_ => _modelService.HideModel())
                 .AddTo(_compositeDisposable);
 
             _arImage
                 .TrackImageUpdateAsObservable()
                 .Subscribe(value =>
                 {
-                    model.SetActive(true);
-                    model.SetPositionAndRotation(value.Item1, value.Item2);
+                    _modelService.ShowModel();
+                    _modelService.SetPositionAndRotation(value.Item1, value.Item2);
                 })
                 .AddTo(_compositeDisposable);
         }

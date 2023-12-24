@@ -12,7 +12,7 @@ namespace Model.Bootstrap
         public override void InstallBindings()
         {
             Container
-                .BindInterfacesTo<ModelService>()
+                .BindInterfacesTo<ModelViewService>()
                 .AsSingle()
                 .NonLazy();
 

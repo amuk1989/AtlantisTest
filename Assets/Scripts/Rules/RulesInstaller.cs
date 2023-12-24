@@ -6,10 +6,6 @@ namespace Rules
     {
         public override void InstallBindings()
         {
-            // Container
-            //     .BindInterfacesTo<GetResourcesRule>()
-            //     .AsSingle()
-            //     .NonLazy();
         }
     }
 }
