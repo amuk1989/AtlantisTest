@@ -10,16 +10,16 @@ namespace Base.Rules
     {
         protected readonly CompositeDisposable CompositeDisposable = new();
 
-        private readonly IGameStageService _gameStageService;
+        protected readonly IGameStageService GameStageService;
 
         protected BaseGamesRule(IGameStageService gameStageService)
         {
-            _gameStageService = gameStageService;
+            GameStageService = gameStageService;
         }
 
         public void Initialize()
         {
-            _gameStageService
+            GameStageService
                 .GameStageAsObservable()
                 .Subscribe(OnStageChanged)
                 .AddTo(CompositeDisposable);

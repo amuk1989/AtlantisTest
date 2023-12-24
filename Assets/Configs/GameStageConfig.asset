@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GameStageConfig
   m_EditorClassIdentifier: 
   _data:
-    _gameStageIds: 0300000002000000
+    _gameStageIds: 0200000003000000

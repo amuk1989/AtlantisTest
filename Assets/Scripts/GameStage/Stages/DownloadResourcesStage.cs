@@ -19,13 +19,9 @@ namespace GameStage.Stages
             _arService = arService;
         }
 
-        public async void Execute()
+        public void Execute()
         {
             _imageProvider.Enable();
-            var image = await _imageProvider.ImageAsObservable()
-                .ToUniTask(useFirstValue: true);
-            Debug.Log(image.format);
-            _arService.SetImage(image);
         }
 
         public void Complete()

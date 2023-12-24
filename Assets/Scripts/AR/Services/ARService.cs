@@ -32,8 +32,8 @@ namespace AR.Services
 
         public void SetImage(Texture2D imageToAdd)
         {
-            if (!(ARSession.state == ARSessionState.SessionInitializing || ARSession.state == ARSessionState.SessionTracking))
-                return; // Session state is invalid
+            // if (!(ARSession.state == ARSessionState.SessionInitializing || ARSession.state == ARSessionState.SessionTracking))
+            //     return; // Session state is invalid
 
             if (_arComponents.TrackedImageManager.referenceLibrary is MutableRuntimeReferenceImageLibrary mutableLibrary)
             {

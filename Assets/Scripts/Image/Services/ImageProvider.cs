@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Image.Configs;
@@ -16,6 +17,7 @@ namespace Image.Services
         private readonly IWebRequestService _webRequestService;
         
         private readonly ReactiveCommand<Texture2D> _onNewImage = new();
+        private CancellationTokenSource _token;
         
         public ImageProvider(ImageConfigsData imageConfigsData, IWebRequestService webRequestService)
         {
@@ -33,34 +35,23 @@ namespace Image.Services
             _onNewImage.Execute(await GetDataFromUrl(_imageConfigsData.Url));
         }
 
+        public void Disable()
+        {
+            if (_token == null) return;
+            
+            _token.Cancel();
+            _token.Dispose();
+
+            _token = null;
+        }
+
         private async UniTask<Texture2D> GetDataFromUrl(string url)
         {
-            return await _webRequestService.GetTextureFromUrl(url, default);
-            // UnityWebRequest request = null;
-            // Texture2D result = null;
-            //
-            // try
-            // {
-            //     request = UnityWebRequestTexture.GetTexture(url);
-            //     
-            //     var downloadHandler = request.downloadHandler;
-            //     await UniTask.SwitchToMainThread();
-            //     await request.SendWebRequest();
-            //     
-            //     if (request.result != UnityWebRequest.Result.Success) return null;
-            //     
-            //     result = ((DownloadHandlerTexture) downloadHandler).texture;
-            // }
-            // catch(UnityWebRequestException exception)
-            // {
-            //     Debug.Log(exception.Message);
-            // }
-            // finally
-            // {
-            //     request?.Dispose();
-            // }
-            //
-            // return result;
+            _token = new CancellationTokenSource();
+            var image =  await _webRequestService.GetTextureFromUrl(url, _token.Token);
+            Disable();
+
+            return image;
         }
     }
 }
