@@ -65,7 +65,7 @@ namespace GameStage.Stages
                 .ToUniTask(true, cancellationToken: token)
                 .SuppressCancellationThrow();
             
-            await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: token);//TO DO: bad solution
             
             Debug.Log("[DownloadResourcesStage] Completed");
         }
