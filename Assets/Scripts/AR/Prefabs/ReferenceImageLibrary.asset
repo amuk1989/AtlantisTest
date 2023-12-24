@@ -27,13 +27,3 @@ MonoBehaviour:
     m_SpecifySize: 0
     m_Name: diffuse
     m_Texture: {fileID: 0}
-  - m_SerializedGuid:
-      m_GuidLow: 5388987712206568581
-      m_GuidHigh: 13901041937606501565
-    m_SerializedTextureGuid:
-      m_GuidLow: 15277461569998552938
-      m_GuidHigh: 6707549977844829082
-    m_Size: {x: 0, y: 0}
-    m_SpecifySize: 0
-    m_Name: mrk6440mark
-    m_Texture: {fileID: 0}

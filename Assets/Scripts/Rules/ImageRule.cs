@@ -32,9 +32,13 @@ namespace Rules
                 .ImageAsObservable()
                 .ToUniTask(useFirstValue: true);
             
+            Debug.Log($"[ImageRule] image==nul : {image==null}, format: {image.graphicsFormat}");
+            
+            if (image == null) return;
+            
             _arService.SetImage(image);
             
-            GameStageService.NextStage();
+            // GameStageService.NextStage();
         }
     }
 }
