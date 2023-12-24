@@ -11,12 +11,18 @@ namespace WebRequest.Services
     public class WebRequestService: IWebRequestService
     {
         private readonly ReactiveProperty<float> _progress = new(0);
+        private readonly ReactiveCommand _onCompleted = new();
 
         private IDisposable _progressFlow;
         
         public IObservable<float> RequestProgressAsObservable()
         {
             return _progress.AsObservable();
+        }
+
+        public IObservable<Unit> RequestCompletedAsObservable()
+        {
+            return _onCompleted.AsObservable();
         }
 
         public UniTask<Texture2D> GetTextureFromUrl(string url, CancellationToken token)
@@ -103,12 +109,18 @@ namespace WebRequest.Services
         {
             _progressFlow = Observable
                 .EveryUpdate()
-                .Subscribe(_ => _progress.Value = webRequest.downloadProgress);
+                .Subscribe(_ =>
+                {
+                    _progress.Value = webRequest.downloadProgress;
+                    Debug.Log($"[WebRequestService] progress {_progress.Value}");
+                });
         }
 
-        private void StopProgressFlow()
+        private async void StopProgressFlow()
         {
             _progressFlow?.Dispose();
+            await UniTask.Yield();
+            _onCompleted.Execute();
             _progress.Value = 0;
         }
     }

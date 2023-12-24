@@ -6,10 +6,10 @@ namespace Rules
     {
         public override void InstallBindings()
         {
-            Container
-                .BindInterfacesTo<ImageRule>()
-                .AsSingle()
-                .NonLazy();
+            // Container
+            //     .BindInterfacesTo<GetResourcesRule>()
+            //     .AsSingle()
+            //     .NonLazy();
         }
     }
 }

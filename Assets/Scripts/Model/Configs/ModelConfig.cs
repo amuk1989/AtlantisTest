@@ -1,6 +1,7 @@
 ﻿using System;
 using Base.Data;
 using Base.Interfaces;
+using Model.Views;
 using UnityEngine;
 
 namespace Model.Configs
@@ -15,7 +16,8 @@ namespace Model.Configs
     public struct ModelConfigData: IConfigData
     {
         [SerializeField] private string _url;
-        
+        [SerializeField] private ModelView _prefab;
         public string Url => _url;
+        public ModelView Prefab => _prefab;
     }
 }

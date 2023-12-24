@@ -2,6 +2,7 @@
 using GameStage.Controllers;
 using Image.Configs;
 using Input.Configs;
+using Model.Configs;
 using UnityEngine;
 using Utility;
 using Zenject;
@@ -15,6 +16,7 @@ namespace Main.Bootstrap
         [SerializeField] private InputConfig _inputConfig;
         [SerializeField] private ARConfig _arConfig;
         [SerializeField] private ImageConfigs _imageConfigs;
+        [SerializeField] private ModelConfig _modelConfig;
             
         public override void InstallBindings()
         {
@@ -22,6 +24,7 @@ namespace Main.Bootstrap
             Container.InstallRegistry(_inputConfig.Data);
             Container.InstallRegistry(_arConfig.Data);
             Container.InstallRegistry(_imageConfigs.Data);
+            Container.InstallRegistry(_modelConfig.Data);
         }
     }
 }

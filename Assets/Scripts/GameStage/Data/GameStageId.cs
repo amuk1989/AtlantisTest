@@ -6,6 +6,7 @@
         StartMenu,
         ARSession,
         ResourcesDownload,
+        ARGame,
         Finish
     }
 }

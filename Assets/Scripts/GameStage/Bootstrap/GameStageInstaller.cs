@@ -31,6 +31,12 @@ namespace GameStage.Bootstrap
                 .AsSingle();
             
             Container
+                .Bind<IGameStage>()
+                .WithId(GameStageId.ARGame)
+                .To<ARGameStage>()
+                .AsSingle();
+            
+            Container
                 .BindInterfacesTo<GameStageController>()
                 .AsSingle()
                 .NonLazy();

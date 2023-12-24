@@ -5,7 +5,7 @@ namespace Image.Interfaces
 {
     public interface IImageProvider
     {
-        public IObservable<Texture2D> ImageAsObservable();
+        public Texture2D GetImage();
         public void Enable();
         public void Disable();
     }

@@ -21,10 +21,11 @@ namespace Model.Services
         
         private CancellationTokenSource _token;
 
-        public ModelService(IWebRequestService webRequestService, ModelConfigData configData)
+        public ModelService(IWebRequestService webRequestService, ModelConfigData modelConfigData, ModelView.Factory factory)
         {
             _webRequestService = webRequestService;
-            _modelConfigData = configData;
+            _modelConfigData = modelConfigData;
+            _factory = factory;
         }
 
         public void Dispose()
