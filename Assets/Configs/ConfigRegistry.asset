@@ -16,3 +16,4 @@ MonoBehaviour:
   _inputConfig: {fileID: 11400000, guid: 09c0b15ea68c69146a9e98105397e1e7, type: 2}
   _arConfig: {fileID: 11400000, guid: dc14bbaf46852f24dba7804977d32cee, type: 2}
   _imageConfigs: {fileID: 11400000, guid: f3820fb9725a6e64788711bef2a9fda5, type: 2}
+  _modelConfig: {fileID: 11400000, guid: 8aa49d49b078cc94b9052005062866e0, type: 2}

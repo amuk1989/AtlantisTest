@@ -11,12 +11,18 @@ namespace WebRequest.Services
     public class WebRequestService: IWebRequestService
     {
         private readonly ReactiveProperty<float> _progress = new(0);
+        private readonly ReactiveCommand _onCompleted = new();
 
         private IDisposable _progressFlow;
         
         public IObservable<float> RequestProgressAsObservable()
         {
             return _progress.AsObservable();
+        }
+
+        public IObservable<Unit> RequestCompletedAsObservable()
+        {
+            return _onCompleted.AsObservable();
         }
 
         public UniTask<Texture2D> GetTextureFromUrl(string url, CancellationToken token)
@@ -61,7 +67,42 @@ namespace WebRequest.Services
 
         public UniTask<byte[]> GetDataFromUrl(string url, CancellationToken token)
         {
-            throw new NotImplementedException();
+            return UniTask.RunOnThreadPool(async () =>
+            {
+                UnityWebRequest request = null;
+                byte[] result = null;
+
+                try
+                {
+                    await UniTask.SwitchToMainThread(cancellationToken: token);
+                    
+                    request = UnityWebRequest.Get(url);
+                    var downloadHandler = request.downloadHandler;
+
+                    UpdateProgressFlow(request);
+                    
+                    await request
+                        .SendWebRequest()
+                        .WithCancellation(token)
+                        .SuppressCancellationThrow();
+
+                    if (request.result == UnityWebRequest.Result.Success && !token.IsCancellationRequested)
+                    {
+                        result = downloadHandler.data;
+                    }
+                }
+                catch (UnityWebRequestException exception)
+                {
+                    Debug.Log(exception.Message);
+                }
+                finally
+                {
+                    StopProgressFlow();
+                    request?.Dispose();
+                }
+
+                return result;
+            }, cancellationToken: token);
         }
 
         private void UpdateProgressFlow(UnityWebRequest webRequest)
@@ -71,9 +112,11 @@ namespace WebRequest.Services
                 .Subscribe(_ => _progress.Value = webRequest.downloadProgress);
         }
 
-        private void StopProgressFlow()
+        private async void StopProgressFlow()
         {
             _progressFlow?.Dispose();
+            await UniTask.Yield();
+            _onCompleted.Execute();
             _progress.Value = 0;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using AR.Configs;
+using AR.Controllers;
 using AR.Services;
 using AR.Views;
 using Zenject;
@@ -17,6 +18,16 @@ namespace AR.Bootstrap
 
             Container
                 .BindInterfacesTo<ARService>()
+                .AsSingle()
+                .NonLazy();
+            
+            Container
+                .BindInterfacesTo<ARImageService>()
+                .AsSingle()
+                .NonLazy();
+
+            Container
+                .BindInterfacesAndSelfTo<ARController>()
                 .AsSingle()
                 .NonLazy();
         }

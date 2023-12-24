@@ -1,5 +1,8 @@
-﻿using AR.Interfaces;
+﻿using System;
+using AR.Controllers;
+using AR.Interfaces;
 using AR.Views;
+using UniRx;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -9,42 +12,30 @@ namespace AR.Services
     internal class ARService: IARService
     {
         private readonly ARComponents.Factory _arFactory;
+        private readonly ARController _arController;
         
         private ARComponents _arComponents = null;
 
-        public ARService(ARComponents.Factory arFactory)
+        public ARService(ARComponents.Factory arFactory, ARController arController)
         {
             _arFactory = arFactory;
+            _arController = arController;
         }
 
         public void AREnable()
         {
-            _arComponents ??= _arFactory.Create();
+            _arController.CreateARComponent();
         }
 
         public void ARDisable()
         {
-            if (_arComponents == null) return;
-            
-            _arComponents.Dispose();
-            _arComponents = null;
+            _arController.DestroyArComponent();
         }
 
-        public void SetImage(Texture2D imageToAdd)
+        public void SetArObject(GameObject gameObject)
         {
-            if (!(ARSession.state == ARSessionState.SessionInitializing || ARSession.state == ARSessionState.SessionTracking))
-                return; // Session state is invalid
-            
-            Debug.Log($"[ARService] ARSession.state = {ARSession.state}");
-
-            if (_arComponents.TrackedImageManager.referenceLibrary is MutableRuntimeReferenceImageLibrary mutableLibrary)
-            {
-                Debug.Log($"[ARService] Ref lib is mutable");
-                mutableLibrary.ScheduleAddImageWithValidationJob(
-                    imageToAdd,
-                    "Tracked image",
-                    0.100f);
-            }
+            if (_arComponents == null) return;
+            _arComponents.TrackedImageManager.trackedImagePrefab = gameObject;
         }
     }
 }

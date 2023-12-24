@@ -1,12 +1,8 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using Image.Configs;
 using Image.Interfaces;
-using UniRx;
 using UnityEngine;
-using UnityEngine.Networking;
 using WebRequest.Interfaces;
 
 namespace Image.Services
@@ -16,7 +12,7 @@ namespace Image.Services
         private readonly ImageConfigsData _imageConfigsData;
         private readonly IWebRequestService _webRequestService;
         
-        private readonly ReactiveCommand<Texture2D> _onNewImage = new();
+        private Texture2D _image = null;
         private CancellationTokenSource _token;
         
         public ImageProvider(ImageConfigsData imageConfigsData, IWebRequestService webRequestService)
@@ -25,14 +21,14 @@ namespace Image.Services
             _webRequestService = webRequestService;
         }
 
-        public IObservable<Texture2D> ImageAsObservable()
+        public Texture2D GetImage()
         {
-            return _onNewImage.AsObservable();
+            return _image;
         }
 
         public async void Enable()
         {
-            _onNewImage.Execute(await GetDataFromUrl(_imageConfigsData.Url));
+            _image = await GetDataFromUrl(_imageConfigsData.Url);
         }
 
         public void Disable()
