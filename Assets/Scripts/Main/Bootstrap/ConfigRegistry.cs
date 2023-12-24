@@ -1,5 +1,6 @@
 ﻿using AR.Configs;
 using GameStage.Controllers;
+using Image.Configs;
 using Input.Configs;
 using UnityEngine;
 using Utility;
@@ -13,12 +14,14 @@ namespace Main.Bootstrap
         [SerializeField] private GameStageConfig _gameStageConfig;
         [SerializeField] private InputConfig _inputConfig;
         [SerializeField] private ARConfig _arConfig;
+        [SerializeField] private ImageConfigs _imageConfigs;
             
         public override void InstallBindings()
         {
             Container.InstallRegistry(_gameStageConfig.Data);
             Container.InstallRegistry(_inputConfig.Data);
             Container.InstallRegistry(_arConfig.Data);
+            Container.InstallRegistry(_imageConfigs.Data);
         }
     }
 }

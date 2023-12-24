@@ -5,6 +5,7 @@
         None,
         StartMenu,
         ARSession,
+        ResourcesDownload,
         Finish
     }
 }

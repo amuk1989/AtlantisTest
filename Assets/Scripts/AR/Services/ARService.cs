@@ -34,9 +34,12 @@ namespace AR.Services
         {
             if (!(ARSession.state == ARSessionState.SessionInitializing || ARSession.state == ARSessionState.SessionTracking))
                 return; // Session state is invalid
+            
+            Debug.Log($"[ARService] ARSession.state = {ARSession.state}");
 
             if (_arComponents.TrackedImageManager.referenceLibrary is MutableRuntimeReferenceImageLibrary mutableLibrary)
             {
+                Debug.Log($"[ARService] Ref lib is mutable");
                 mutableLibrary.ScheduleAddImageWithValidationJob(
                     imageToAdd,
                     "Tracked image",
