@@ -4,6 +4,7 @@ using Image.Bootstrap;
 using Input.Bootstrap;
 using Model.Bootstrap;
 using Rules;
+using UI.Bootstrap;
 using WebRequest.Bootstrap;
 using WebRequest.Services;
 using Zenject;
@@ -21,6 +22,9 @@ namespace Main.Bootstrap
             Container.Install<ImageInstaller>();
             Container.Install<ModelInstaller>();
             Container.Install<WebRequestInstaller>();
+            Container.Install<UIBootstrap>();
+            
+            SignalBusInstaller.Install(Container);
         }
     }
 }
