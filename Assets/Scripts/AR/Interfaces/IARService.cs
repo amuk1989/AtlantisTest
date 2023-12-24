@@ -6,6 +6,7 @@ namespace AR.Interfaces
     {
         public void AREnable();
         public void ARDisable();
-        public void SetImage(Texture2D imageToAdd);
+        public void SetTrackImage(Texture2D imageToAdd);
+        public void SetArObject(GameObject gameObject);
     }
 }

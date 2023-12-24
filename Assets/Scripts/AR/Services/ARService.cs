@@ -30,7 +30,13 @@ namespace AR.Services
             _arComponents = null;
         }
 
-        public void SetImage(Texture2D imageToAdd)
+        public void SetArObject(GameObject gameObject)
+        {
+            if (_arComponents == null) return;
+            _arComponents.TrackedImageManager.trackedImagePrefab = gameObject;
+        }
+
+        public void SetTrackImage(Texture2D imageToAdd)
         {
             if (!(ARSession.state == ARSessionState.SessionInitializing || ARSession.state == ARSessionState.SessionTracking))
                 return; // Session state is invalid

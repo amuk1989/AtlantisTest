@@ -36,7 +36,7 @@ namespace Rules
             
             if (image == null) return;
             
-            _arService.SetImage(image);
+            _arService.SetTrackImage(image);
             
             // GameStageService.NextStage();
         }

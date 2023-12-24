@@ -2,6 +2,7 @@
 using GameStage.Bootstrap;
 using Image.Bootstrap;
 using Input.Bootstrap;
+using Model.Bootstrap;
 using Rules;
 using WebRequest.Bootstrap;
 using WebRequest.Services;
@@ -18,6 +19,7 @@ namespace Main.Bootstrap
             Container.Install<InputInstaller>();
             Container.Install<ARInstaller>();
             Container.Install<ImageInstaller>();
+            Container.Install<ModelInstaller>();
             Container.Install<WebRequestInstaller>();
         }
     }

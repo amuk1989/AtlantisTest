@@ -61,7 +61,42 @@ namespace WebRequest.Services
 
         public UniTask<byte[]> GetDataFromUrl(string url, CancellationToken token)
         {
-            throw new NotImplementedException();
+            return UniTask.RunOnThreadPool(async () =>
+            {
+                UnityWebRequest request = null;
+                byte[] result = null;
+
+                try
+                {
+                    await UniTask.SwitchToMainThread(cancellationToken: token);
+                    
+                    request = UnityWebRequest.Get(url);
+                    var downloadHandler = request.downloadHandler;
+
+                    UpdateProgressFlow(request);
+                    
+                    await request
+                        .SendWebRequest()
+                        .WithCancellation(token)
+                        .SuppressCancellationThrow();
+
+                    if (request.result == UnityWebRequest.Result.Success && !token.IsCancellationRequested)
+                    {
+                        result = downloadHandler.data;
+                    }
+                }
+                catch (UnityWebRequestException exception)
+                {
+                    Debug.Log(exception.Message);
+                }
+                finally
+                {
+                    StopProgressFlow();
+                    request?.Dispose();
+                }
+
+                return result;
+            }, cancellationToken: token);
         }
 
         private void UpdateProgressFlow(UnityWebRequest webRequest)
