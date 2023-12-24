@@ -18,7 +18,7 @@ namespace Model.Views
         public void SetScale(float scale) => transform.localScale = Vector3.one * scale;
         public void SetRotationIncrement(Quaternion increment)
         {
-            _transform.rotation = increment;
+            _transform.localRotation = increment;
         }
 
         public void Dispose()

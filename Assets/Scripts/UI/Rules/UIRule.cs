@@ -16,6 +16,8 @@ namespace UI.Rules
         private readonly BaseUI.Factory _uiPrefabFactory;
         private readonly SignalBus _signalBus;
 
+        private BaseUI _loadUI;
+
         public UIRule(IGameStageService gameStageService, 
             UIComponent uiComponent, BaseUI.Factory uiPrefabFactory, SignalBus signalBus) : base(gameStageService)
         {
@@ -28,8 +30,12 @@ namespace UI.Rules
         {
             switch (gameStageId)
             {
+                case GameStageId.ARSession:
+                    _loadUI = _uiPrefabFactory.Create("Prefabs/UI/Load", _uiComponent.Transform);
+                    break;
                 case GameStageId.ARGame:
                     _uiPrefabFactory.Create("Prefabs/UI/ScalingUI", _uiComponent.Transform);
+                    _loadUI.Dispose();
                     break;
                 case GameStageId.ResourcesDownload:
                     _signalBus
