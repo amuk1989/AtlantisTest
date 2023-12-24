@@ -20,12 +20,6 @@ namespace GameStage.Bootstrap
             
             Container
                 .Bind<IGameStage>()
-                .WithId(GameStageId.StartMenu)
-                .To<MainMenuStage>()
-                .AsSingle();
-            
-            Container
-                .Bind<IGameStage>()
                 .WithId(GameStageId.ResourcesDownload)
                 .To<DownloadResourcesStage>()
                 .AsSingle();

@@ -1,7 +1,6 @@
 ﻿using AR.Configs;
 using GameStage.Controllers;
 using Image.Configs;
-using Input.Configs;
 using Model.Configs;
 using UnityEngine;
 using Utility;
@@ -13,7 +12,6 @@ namespace Main.Bootstrap
     public class ConfigRegistry : ScriptableObjectInstaller
     {
         [SerializeField] private GameStageConfig _gameStageConfig;
-        [SerializeField] private InputConfig _inputConfig;
         [SerializeField] private ARConfig _arConfig;
         [SerializeField] private ImageConfigs _imageConfigs;
         [SerializeField] private ModelConfig _modelConfig;
@@ -21,7 +19,6 @@ namespace Main.Bootstrap
         public override void InstallBindings()
         {
             Container.InstallRegistry(_gameStageConfig.Data);
-            Container.InstallRegistry(_inputConfig.Data);
             Container.InstallRegistry(_arConfig.Data);
             Container.InstallRegistry(_imageConfigs.Data);
             Container.InstallRegistry(_modelConfig.Data);
